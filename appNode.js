@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
   const parseUrl = url.parse(req.url);
-  const parseQuery = parseUrl.query;
+  const parseQuery = querystring.parse(parseUrl.query);
 
   if (parseQuery.address) {
     res.statusCode = 400;
