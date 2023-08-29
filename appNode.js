@@ -11,12 +11,13 @@ const server = http.createServer((req, res) => {
   const parseUrl = url.parse(req.url);
   const parseQuery = querystring.parse(parseUrl.query);
 
-  if (parseQuery.address) {
+  if (!parseQuery.address) {
     res.statusCode = 400;
     res.end(JSON.stringify({ error: 'Must enter the address' }));
     return;
   }
 
+  console.log(parseQuery.address);
   weatherApp(parseQuery.address)
     .then((data) => {
       res.statusCode = 200;

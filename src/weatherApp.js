@@ -1,18 +1,15 @@
 const weatherApp = (address) => {
+  console.log(address);
   return new Promise((resolve, reject) => {
     const info = {
-      url:
-        'http://api.weatherstack.com/v1/current.json?key=73738c532e5e834ee689c143151231508?location=' +
-        address,
+      url: `http://api.weatherapi.com/v1/current.json?key=04be1096868245f4860134938232908&q=${address}&aqi=no`,
       json: true,
     };
-    request(info, (error, response) => {
+    request(info, (error, { body }) => {
       if (error) {
         reject(error);
-      } else if (response.body.error) {
-        reject(response.body.error);
       } else {
-        resolve(response.body);
+        resolve(body);
       }
     });
   });
